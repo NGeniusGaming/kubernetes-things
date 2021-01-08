@@ -14,6 +14,13 @@ Example command to create a secret:
 kubectl create secret generic my-secret --from-literal=username=my-username --from-literal=password=my-password
 ```
 
+Example command to update a secret:
+
+```bash
+kubectl create secret generic my-secret --from-literal=foo=bar --dry-run=client -o yaml \
+    | kubectl apply -f -
+```
+
 ### Traefik
 > Traefik is used as our ingress provider and SSL certbot.
 
