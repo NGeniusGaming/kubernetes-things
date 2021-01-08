@@ -1,0 +1,27 @@
+additionalArguments:
+  - "--certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json"
+  - "--certificatesresolvers.letsencrypt.acme.email=brandon.ward1993@gmail.com"
+  - "--certificatesresolvers.letsencrypt.acme.dnsChallenge.provider=duckdns"
+ports:
+  web:
+    redirectTo: websecure
+env:
+  - name: DUCKDNS_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: duckdns
+        key: token
+ingressRoute:
+  dashboard:
+    enabled: false
+persistence:
+  enabled: true
+  path: /certs
+  size: 128Mi
+ports.websecure.tls:
+  enabled: true
+  certResolver: "letsencrypt"
+  domains:
+    - main: ngen-alpha.duckdns.org
+      sans: 
+        - "*.ngen-alpha.duckdns.org"
