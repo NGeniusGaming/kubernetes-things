@@ -25,3 +25,5 @@ ports.websecure.tls:
     - main: ngen-alpha.duckdns.org
       sans: 
         - "*.ngen-alpha.duckdns.org"
+podSecurityContext:
+  fsGroup: null # workaround described: https://github.com/traefik/traefik-helm-chart/issues/164#issuecomment-621345258

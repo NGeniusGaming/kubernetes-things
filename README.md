@@ -8,6 +8,12 @@ This repository is a small collection of kubernetes yamls used to set up the NGE
 Never commit secrets / passwords / anything else senstive to this repository. It is public.
 Secrets are to be managed directly in the cluster in order to prevent leaking sensitive data.
 
+Example command to create a secret:
+
+```bash
+kubectl create secret generic my-secret --from-literal=username=my-username --from-literal=password=my-password
+```
+
 ### Traefik
 > Traefik is used as our ingress provider and SSL certbot.
 
