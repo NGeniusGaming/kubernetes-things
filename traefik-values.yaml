@@ -1,15 +1,15 @@
 additionalArguments:
-  - "--certificatesresolvers.letsencrypt.acme.storage=/certs/acme.json"
-  - "--certificatesresolvers.letsencrypt.acme.email=brandon.ward1993@gmail.com"
-  - "--certificatesresolvers.letsencrypt.acme.dnsChallenge.provider=duckdns"
+  - "--certificatesresolvers.letsencrypt.acme.storage=/certs/temp.json"
+  - "--certificatesresolvers.letsencrypt.acme.email=spikearndt@gmail.com"
+  - "--certificatesresolvers.letsencrypt.acme.dnsChallenge.provider=linodev4"
 ports:
   web:
     redirectTo: websecure
 env:
-  - name: DUCKDNS_TOKEN
+  - name: LINODE_TOKEN
     valueFrom:
       secretKeyRef:
-        name: duckdns
+        name: linode
         key: token
 ingressRoute:
   dashboard:
@@ -22,8 +22,11 @@ ports.websecure.tls:
   enabled: true
   certResolver: "letsencrypt"
   domains:
-    - main: ngen-alpha.duckdns.org
-      sans: 
-        - "*.ngen-alpha.duckdns.org"
+    - main: ngeniusgaming.us
+      sans:
+        - "*.ngeniusgaming.us"
+    - main: admin.ngeniusgaming.us
+      sans:
+        - "*.admin.ngeniusgaming.us"
 podSecurityContext:
   fsGroup: null # workaround described: https://github.com/traefik/traefik-helm-chart/issues/164#issuecomment-621345258
